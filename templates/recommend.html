@@ -27,15 +27,24 @@
             <div class="col-md-12">
                 <h1 class="text-highlight" style="font-size:50px">Recommend Books</h1>
                 <form action = "/recommend_books" method = "post">
-                    <input name = "user_input" type="text" class="form-control"><br>
-                    <input type="submit" class="btn-btn-lg btn-warning">
+                    <input list = "books" name = "user_input" type="text" class="form-control" placeholder="Enter book title"><br>
+
+                    <datalist id = "books">
+                        {% for book in book_name %}
+                            <option value = "{{book}}"></option>
+                        {% endfor %}
+                    </datalist>
+                    <input type="submit" class="btn btn-lg btn-warning" value = "Recommend">
                 </form>
+                 {% if error %}
+                     <p style="color:red; font-weight:bold; margin-top:20px;">{{ error }}</p>
+                  {% endif %}
+                </div>
             </div>
 
             {% if data %}
-
+            <div class = "row">
             {% for i in data %}
-            
                 <div class="col-md-3" style = "margin-top:50px">
                     <div class="card">
                         <div class="card-body">
@@ -45,10 +54,9 @@
                             
                         </div>
                     </div>
-                </div>
-            {% endfor%}
-
-             
+                </div> 
+                {% endfor%}
+            </div> 
 
             {% endif %}
 
@@ -57,7 +65,7 @@
             
 
             
-        </div>
+        
                 
 
     </div>
